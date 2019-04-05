@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import store, { UPDATE_NAME, UPDATE_ADDRESS, UPDATE_CITY, UPDATE_STATE, UPDATE_ZIPCODE} from './../ducks/store'
+import store, { UPDATE_NAME_ADD_CITY_ST_ZIP} from './../ducks/store'
 
 class StepOne extends Component {
     constructor(props) {
@@ -12,7 +12,8 @@ class StepOne extends Component {
             address: reduxState.address,
             city: reduxState.city,
             state: reduxState.state,
-            zipcode: reduxState.zipcode
+            zipcode: reduxState.zipcode,
+            input: {}
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -37,7 +38,12 @@ class StepOne extends Component {
     })
   }
 
-  handleNext
+  handleNext() {
+      store.dispatch({
+          type: UPDATE_NAME_ADD_CITY_ST_ZIP,
+          payload: this.state.input
+      })
+  }
 
   render() {
     return (
