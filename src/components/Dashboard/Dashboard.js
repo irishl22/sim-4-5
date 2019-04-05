@@ -36,9 +36,6 @@ class Dashboard extends Component {
         <Link to="/wizard">
             <button>Add New Property</button>
         </Link>
-        <Link to="/">
-            <button>Cancel</button>
-        </Link>
         {this.state.houses.map((house, i) => <House key={i} house={house} deleteHouseFn={this.deleteHouse}/>)}
       </div>
     )
