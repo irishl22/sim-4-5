@@ -15,7 +15,7 @@ class House extends Component {
         {this.props.house.city}
         {this.props.house.state}
         {this.props.house.zipcode}
-        <button>Delete</button>
+        <button onClick={this.props.deleteHouseFn}>Delete</button>
       </div>
     )
   }

@@ -16,19 +16,22 @@ class Wizard extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
-  handleChange(e) {
+  handleChange(prop, val) {
     this.setState({
-      [e.target.name]: e.target.value
+      [prop]: val
     })
   }
 
   handleAdd = () => {
-    axios.post('/api/house', this.state)
+    const { name, address, city, state, zipcode } = this.state 
+    axios.post('/api/house', {name, address, city, state, zipcode})
       .then(res => {
         this.setState({
-          img: '',
           name: '',
-          price: 0
+          address: '',
+          city: '',
+          state: '',
+          zipcode: 0
         })
         this.props.history.push('/');
       }).catch(err => console.log(err))
@@ -37,11 +40,11 @@ class Wizard extends Component {
   render() {
     return (
       <div>
-        <input name="name" value={this.state.name} type="text" onChange={e => this.handleChange(e.target.value)}/>
-        <input name="address" value={this.state.address} type="text" onChange={e => this.handleChange(e.target.value)}/>
-        <input name="city" value={this.state.city} type="text" onChange={e => this.handleChange(e.target.value)}/>
-        <input name="state" value={this.state.state} type="text" onChange={e => this.handleChange(e.target.value)}/>
-        <input name="zipcode" value={this.state.zipcode} type="number" onChange={e => this.handleChange(e.target.value)}/>
+        <input name="name" value={this.state.name} type="text" onChange={e => this.handleChange("name", e.target.value)}/>
+        <input name="address" value={this.state.address} type="text" onChange={e => this.handleChange("address", e.target.value)}/>
+        <input name="city" value={this.state.city} type="text" onChange={e => this.handleChange("city", e.target.value)}/>
+        <input name="state" value={this.state.state} type="text" onChange={e => this.handleChange("state", e.target.value)}/>
+        <input name="zipcode" value={this.state.zipcode} type="number" onChange={e => this.handleChange("zipcode", e.target.value)}/>
         <button onChange={this.handleAdd}>Complete</button>
       </div>
     )

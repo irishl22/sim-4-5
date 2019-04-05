@@ -12,6 +12,15 @@ class Dashboard extends Component {
         }
     }
 
+    deleteHouse = id => {
+        axios.delete(`/api/house/${id}`).then(res => {
+            this.setState({
+                houses: res.data
+            })
+            this.componentDidMount()
+        }).catch(err => console.log('error on delete', err))
+    }
+
     componentDidMount = () => {
         axios.get('/api/houses').then(res => {
           this.setState({
@@ -30,7 +39,7 @@ class Dashboard extends Component {
         <Link to="/">
             <button>Cancel</button>
         </Link>
-        {this.state.houses.map((house, i) => <House key={i} house={house} />)}
+        {this.state.houses.map((house, i) => <House key={i} house={house} deleteHouseFn={this.deleteHouse}/>)}
       </div>
     )
   }
